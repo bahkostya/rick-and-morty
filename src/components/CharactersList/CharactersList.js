@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useCallback } from 'react';
 import { getLocation, getEpisode } from 'rickmortyapi';
+import { useQueryParam, NumberParam } from 'use-query-params';
 
 import { Card } from '../Card/Card';
 import useCharactersFetch from '../../hooks/useCharactersFetch';
@@ -9,7 +10,8 @@ import { getEntitiesIds, getIdFromUrl } from '../../utils/entities';
 import './CharactersList.css';
 
 export const CharactersList = () => {
-  const [page, setPage] = useState(1);
+  const [initialPage] = useQueryParam('page', NumberParam);
+  const [page, setPage] = useState(initialPage || 1);
 
   const [
     charactersLoading,
@@ -66,6 +68,10 @@ export const CharactersList = () => {
 
   if (charactersLoading) {
     return 'LOADING';
+  }
+
+  if (charactersError) {
+    return 'Something went wrong';
   }
 
   return (

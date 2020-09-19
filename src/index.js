@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { QueryParamProvider } from 'use-query-params';
+
 import { App } from './App';
+
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QueryParamProvider>
+      <App />
+    </QueryParamProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
