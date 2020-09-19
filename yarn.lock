@@ -2973,6 +2973,11 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -9041,6 +9046,11 @@ rgba-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
+
+rickmortyapi@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/rickmortyapi/-/rickmortyapi-0.3.0.tgz#4a36d91b494a20f17680a57138bba62dd5280457"
+  integrity sha512-e+r8qxl3ri/SaY+PMTVS5/AG6hjgFENN8GW/R9yuEXF3jfjXRqsu8oHBaPSJ4KziEp+vbalA9WCvua0T4AE7eg==
 
 rimraf@2.6.3:
   version "2.6.3"

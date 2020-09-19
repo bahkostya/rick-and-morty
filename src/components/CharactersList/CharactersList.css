@@ -1,0 +1,9 @@
+.CharactersList {
+  /* display: flex;
+  align-items: stretch; */
+}
+
+.CharactersList__card {
+  max-width: 600px;
+  margin: 0 auto 16px;
+}

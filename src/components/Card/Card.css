@@ -1,0 +1,43 @@
+.Card {
+  color: var(--medium-champagne);
+  background-color: var(--dark-purple);
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.Card__main {
+  display: flex;
+}
+
+.Card__info {
+  padding-left: 8px;
+}
+
+.Card__image-container {
+  width: 100px;
+  height: 150px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.Card__image {
+  width: 100%;
+  height: 100%;
+  object-position: center center;
+  object-fit: cover;
+}
+
+.Card__name {
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.Card__text {
+  margin: 8px 0 0;
+}
+
+.Card__episodes {
+  width: 100%;
+}
