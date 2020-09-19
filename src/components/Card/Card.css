@@ -58,6 +58,10 @@
   text-decoration: underline;
 }
 
+.Card__loader {
+  margin-left: 4px;
+}
+
 @media (min-width: 600px) {
   .Card__image-container {
     width: 120px;

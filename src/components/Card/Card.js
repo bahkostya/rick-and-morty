@@ -21,7 +21,7 @@ export const Card = ({
   const renderLocation = useCallback(
     ({ loading, error, residentsCount, type, dimension }) => {
       if (loading) {
-        return <InlineLoader />;
+        return <InlineLoader className="Card__loader" />;
       }
 
       if (error) {
@@ -47,7 +47,7 @@ export const Card = ({
   const episodesFragment = useMemo(() => {
     const { loading, error, list } = episodes;
     if (loading) {
-      return <InlineLoader />;
+      return <InlineLoader className="Card__loader" />;
     }
 
     if (error) {
