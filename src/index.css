@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--celadon);
+  background-color: var(--rich-black-fogra-29);
 }
 
 * {
@@ -13,9 +13,9 @@ body {
 }
 
 :root {
-  --celadon: #a9e5bbff;
-  --medium-champagne: #fcf6b1ff;
-  --honey-yellow: #f7b32bff;
-  --red-ryb: #f72c25ff;
-  --dark-purple: #2d1e2fff;
+  --rich-black-fogra-29: #0d1f2dff;
+  --dark-electric-blue: #166678;
+  --light-green: #f0ffef;
+  --acid-green: #93f373;
+  --blue: #79e7ff;
 }

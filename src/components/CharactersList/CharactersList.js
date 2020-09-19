@@ -6,6 +6,7 @@ import { Card } from '../Card/Card';
 import useCharactersFetch from '../../hooks/useCharactersFetch';
 import useEntitiesFetch from '../../hooks/useEntitiesFetch';
 import { getEntitiesIds, getIdFromUrl } from '../../utils/entities';
+import { Pagination } from '../Pagination/Pagination';
 
 import './CharactersList.css';
 
@@ -54,7 +55,13 @@ export const CharactersList = () => {
 
   const getFullEpisodes = useCallback(
     (episode) => {
-      const list = episodesData.map(({ name }) => name);
+      const list = episode.reduce((acc, url) => {
+        const episodeName = episodesData.find(
+          ({ id }) => getIdFromUrl(url) === id
+        )?.name;
+
+        return episodeName ? [...acc, episodeName] : acc;
+      }, []);
 
       return {
         loading: episodesLoading,
@@ -75,31 +82,23 @@ export const CharactersList = () => {
   }
 
   return (
-    <Fragment>
-      {totalPages > 0 && page !== 1 && (
-        <button onClick={() => setPage(page - 1)}>PREVIOUS</button>
+    <section className="CharactersList">
+      {charactersData.map(
+        ({ id, name, species, gender, image, location, origin, episode }) => (
+          <Card
+            className="CharactersList__card"
+            key={id}
+            name={name}
+            species={species}
+            gender={gender}
+            imageSrc={image}
+            location={getFullLocation(location, locationsData)}
+            origin={getFullLocation(origin, locationsData)}
+            episodes={getFullEpisodes(episode)}
+          />
+        )
       )}
-      {totalPages > 0 && page !== totalPages && (
-        <button onClick={() => setPage(page + 1)}>NEXT</button>
-      )}
-
-      <section className="CharactersList">
-        {charactersData.map(
-          ({ id, name, species, gender, image, location, origin, episode }) => (
-            <Card
-              className="CharactersList__card"
-              key={id}
-              name={name}
-              species={species}
-              gender={gender}
-              imageSrc={image}
-              location={getFullLocation(location, locationsData)}
-              origin={getFullLocation(origin, locationsData)}
-              episodes={getFullEpisodes(episode)}
-            />
-          )
-        )}
-      </section>
-    </Fragment>
+      <Pagination total={totalPages} current={page} onPageChange={setPage} />
+    </section>
   );
 };

@@ -1,6 +1,6 @@
 .Card {
-  color: var(--medium-champagne);
-  background-color: var(--dark-purple);
+  color: var(--light-green);
+  background-color: var(--dark-electric-blue);
   padding: 8px;
   font-size: 14px;
   border-radius: 12px;
@@ -30,14 +30,30 @@
 }
 
 .Card__name {
-  font-size: 16px;
+  font-size: 20px;
   margin: 0 0 16px;
+  color: var(--acid-green);
 }
 
 .Card__text {
   margin: 8px 0 0;
 }
 
+.Card__label {
+  color: var(--blue);
+}
+
 .Card__episodes {
-  width: 100%;
+  margin: 8px 0 0;
+}
+
+.Card__show-more {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.Card__show-more:hover {
+  text-decoration: underline;
 }

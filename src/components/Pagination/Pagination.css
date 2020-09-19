@@ -1,0 +1,21 @@
+.Pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Pagination__button {
+  all: unset;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--light-green);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.Pagination__button:hover {
+  color: var(--blue);
+}
+
+.Pagination__button:last-child {
+  margin-left: auto;
+}

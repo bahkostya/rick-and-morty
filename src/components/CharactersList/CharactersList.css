@@ -1,9 +1,10 @@
 .CharactersList {
   /* display: flex;
   align-items: stretch; */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .CharactersList__card {
-  max-width: 600px;
-  margin: 0 auto 16px;
+  margin-bottom: 16px;
 }

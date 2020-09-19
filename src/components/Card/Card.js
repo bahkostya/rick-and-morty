@@ -2,9 +2,9 @@ import React, { useCallback, useMemo, useState } from 'react';
 import clsx from 'clsx';
 
 import { pluralizeEnglishString } from '../../utils/pluralize';
+import { InlineLoader } from '../InlineLoader/InlineLoader';
 
 import './Card.css';
-import { InlineLoader } from '../InlineLoader/InlineLoader';
 
 export const Card = ({
   name,
@@ -27,7 +27,9 @@ export const Card = ({
       if (error) {
         return null;
       }
-      const population = residentsCount && `population ${residentsCount}`;
+
+      const population =
+        residentsCount && pluralizeEnglishString(residentsCount, 'inhabitant');
 
       const locationInfo = [dimension, type, population]
         .filter((value) => value)
@@ -56,11 +58,14 @@ export const Card = ({
       const firstEpisodes = list.slice(0, 5);
 
       return expanded ? (
-        <span>: {list.join(',')}</span>
+        <span>: {list.join(', ')}</span>
       ) : (
         <span>
-          : {firstEpisodes.join(',')}{' '}
-          <button onClick={() => setExpanded(true)}>show more</button>
+          : {firstEpisodes.join(', ')}
+          {'... '}
+          <button className="Card__show-more" onClick={() => setExpanded(true)}>
+            show more
+          </button>
         </span>
       );
     }
@@ -86,15 +91,17 @@ export const Card = ({
           </p>
 
           <p className="Card__text">
-            Location: <b>{location.name}</b> {renderLocation(location)}
+            <span className="Card__label">Location: </span>
+            <b>{location.name}</b> {renderLocation(location)}
           </p>
           <p className="Card__text">
-            Origin: <b>{origin.name}</b> {renderLocation(origin)}
+            <span className="Card__label">Origin: </span>
+            <b>{origin.name}</b> {renderLocation(origin)}
           </p>
         </div>
       </div>
       <p className="Card__episodes">
-        Played in {pluralizeEnglishString(episodes.total, 'episode')}
+        <b>Played in {pluralizeEnglishString(episodes.total, 'episode')}</b>
         {episodesFragment}
       </p>
     </div>

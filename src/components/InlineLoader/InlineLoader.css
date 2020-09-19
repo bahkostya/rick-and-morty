@@ -22,7 +22,7 @@
 
 .InlineLoader__dot {
   animation: dot-keyframes 1s infinite ease-in-out;
-  background-color: #fff;
+  background-color: var(--light-green);
   border-radius: 50%;
   display: inline-block;
   height: 8px;

@@ -1,11 +1,19 @@
 .App {
   margin: 0 auto;
-  padding: 8px;
+  padding: 8px 8px 16px;
   max-width: 1400px;
   min-width: 320px;
 }
 
 .App__header {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.App__logo {
+  width: 100%;
+  max-width: 400px;
 }
 
 .App__main {
