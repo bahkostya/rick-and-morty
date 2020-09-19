@@ -57,3 +57,9 @@
 .Card__show-more:hover {
   text-decoration: underline;
 }
+
+@media (min-width: 600px) {
+  .Card__image-container {
+    width: 120px;
+  }
+}

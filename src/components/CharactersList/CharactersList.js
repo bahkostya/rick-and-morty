@@ -7,6 +7,7 @@ import useCharactersFetch from '../../hooks/useCharactersFetch';
 import useEntitiesFetch from '../../hooks/useEntitiesFetch';
 import { getEntitiesIds, getIdFromUrl } from '../../utils/entities';
 import { Pagination } from '../Pagination/Pagination';
+import loader from '../../assets/loader.png';
 
 import './CharactersList.css';
 
@@ -74,11 +75,17 @@ export const CharactersList = () => {
   );
 
   if (charactersLoading) {
-    return 'LOADING';
+    return (
+      <img className="CharactersList__loader" src={loader} alt="Loading" />
+    );
   }
 
   if (charactersError) {
-    return 'Something went wrong';
+    return (
+      <p className="CharactersList__error">
+        An error occurred while loading the page :( Please try again.
+      </p>
+    );
   }
 
   return (

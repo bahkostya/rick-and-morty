@@ -1,27 +1,10 @@
-@keyframes dot-keyframes {
-  0% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2, 1.2);
-  }
-
-  100% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-}
-
 .InlineLoader {
   display: inline-flex;
   align-items: center;
 }
 
 .InlineLoader__dot {
-  animation: dot-keyframes 1s infinite ease-in-out;
+  animation: dot-loader 1s infinite ease-in-out;
   background-color: var(--light-green);
   border-radius: 50%;
   display: inline-block;
