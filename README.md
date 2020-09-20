@@ -1,68 +1,109 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2 align="center">🔍 Rick and Morty explorer</h2>
 
-## Available Scripts
+Simple app made using React and [Rick & Morty API](https://rickandmortyapi.com/). It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Solution](#solution)
+  - [Data fetching strategy](#data-fetching-strategy)
+  - [Hooks](#hooks)
+
+## Getting started
+
+Open terminal (e.g. Terminal, iTerm, Git Bash or Git Shell) and type:
+
+1. To clone repository:
+
+```sh-session
+$ git clone https://github.com/bahkostya/rick-and-morty.git
+$ cd rick-and-morty
+```
+
+2. Install dependencies:
+
+```sh-session
+$ yarn install
+```
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+- ```sh-session
+  $ yarn start
+  ```
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `yarn test`
+- ```sh-session
+  $ yarn build
+  ```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Builds the app for production to the `build` folder. It is minified and the filenames include the hashes.
 
-### `yarn build`
+## Solution
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Data fetching strategy
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+From the definition the profile of a character should include:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Image
+- Character information (name, species, etc).
+- Origin and location information (name, dimension, amount of residents, etc).
+- Name of the chapters the character is featured on.
 
-### `yarn eject`
+To get all the information from above 3 API calls should be done, as this is how REST endpoints of `rickmortyapi` are designed. The flow of the data retrieval and rendering is following:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Information about characters can be fetched by using `getCharacter` imported from 'rickmortyapi' package.
+2. List of characters with basic information is rendered (name, species, gender, image, name of location/origin, number of episodes). Loaders are shown to indicate that additional information is loading.
+3. Lists of locations/origins/episodes IDs are created from characters data list. Based on IDs 2 more requests are done using `getLocation` and `getEpisode` functions.
+4. Dimensions and population of locations and origins are rendered, names of episodes are rendered in each card.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+By doing this we have a benefit of showing list of characters with basic information to the user and then loading more about locations, origins and names of episodes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Other possible approaches to solve this could be:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- "Render-as-you-fetch" approach when React Suspense is ready for data fetching
+- Using GraphQL to fetch required data in 1 request
 
-## Learn More
+### Hooks
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### `useFetch` - hook for data fetching
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Hook for data fetching.
 
-### Code Splitting
+```
+const [loading, error, data, fetchData] = useFetch(promiseFn);
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- `promiseFn` - function for fetching data, returns a promise
+- `loading` - return value of loading status
+- `error` - error message if `promiseFn` throws an error
+- `data` - result of fetched data
+- `fetchData(...args)` - function to manually trigger fetch, passes taken arguments to `promiseFn`
 
-### Analyzing the Bundle Size
+Under the hood it uses `useReducer` hook to manage state. Reducer is returning new state according to dispatched actions:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- `FETCH_REQUEST` - dispatched before the request is made to indicate beginning of loading or cleaning up data
+- `FETCH_SUCCESS` - dispatched if the request succeeded, new data is added to state
+- `FETCH_FAILURE` - dispatched if the request failed, used to indicate the error
 
-### Making a Progressive Web App
+#### `useCharactersFetch` - hook for fetching characters
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+const [loading, characters, totalPages, error] = useCharactersFetch({ page: 1 })
+```
 
-### Advanced Configuration
+#### `useEntitiesFetch` - hook for fetching entities (locations, episodes)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```
+const [loading, data, error] = useEntitiesFetch(promiseFn, listOfIds)
+```
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- `promiseFn` - `getLocation` or `getEpisode` imported from 'rickmortyapi'
+- `listOfIds` - list of locations/episodes IDs to fetch
