@@ -47,17 +47,6 @@
   margin: 8px 0 0;
 }
 
-.Card__show-more {
-  all: unset;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--blue);
-}
-
-.Card__show-more:hover {
-  text-decoration: underline;
-}
-
 .Card__loader {
   margin-left: 4px;
 }

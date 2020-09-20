@@ -1,0 +1,10 @@
+.ShowMore__button {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.ShowMore__button:hover {
+  text-decoration: underline;
+}

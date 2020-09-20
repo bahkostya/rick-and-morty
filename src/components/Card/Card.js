@@ -1,8 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 
 import { pluralizeEnglishString } from '../../utils/pluralize';
 import { InlineLoader } from '../InlineLoader/InlineLoader';
+import { ShowMore } from '../ShowMore/ShowMore';
 
 import './Card.css';
 
@@ -16,8 +17,6 @@ export const Card = ({
   episodes,
   className,
 }) => {
-  const [expanded, setExpanded] = useState(false);
-
   const renderLocation = useCallback(
     ({ loading, error, residentsCount, type, dimension }) => {
       if (loading) {
@@ -35,11 +34,7 @@ export const Card = ({
         .filter((value) => value)
         .join(', ');
 
-      if (locationInfo) {
-        return <span>({locationInfo})</span>;
-      }
-
-      return null;
+      return locationInfo;
     },
     []
   );
@@ -50,28 +45,8 @@ export const Card = ({
       return <InlineLoader className="Card__loader" />;
     }
 
-    if (error) {
-      return null;
-    }
-
-    if (list.length > 5) {
-      const firstEpisodes = list.slice(0, 5);
-
-      return expanded ? (
-        <span>: {list.join(', ')}</span>
-      ) : (
-        <span>
-          : {firstEpisodes.join(', ')}
-          {'... '}
-          <button className="Card__show-more" onClick={() => setExpanded(true)}>
-            show more
-          </button>
-        </span>
-      );
-    }
-
-    return <span>: {list.join(', ')}</span>;
-  }, [episodes, expanded]);
+    return !error && <ShowMore>{list.join(', ')}</ShowMore>;
+  }, [episodes]);
 
   return (
     <div className={clsx('Card', className)}>
@@ -101,7 +76,7 @@ export const Card = ({
         </div>
       </div>
       <p className="Card__episodes">
-        <b>Played in {pluralizeEnglishString(episodes.total, 'episode')}</b>
+        <b>Played in {pluralizeEnglishString(episodes.total, 'episode')}: </b>
         {episodesFragment}
       </p>
     </div>

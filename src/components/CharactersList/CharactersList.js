@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { getLocation, getEpisode } from 'rickmortyapi';
 import { useQueryParam, NumberParam } from 'use-query-params';
 

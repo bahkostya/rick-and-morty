@@ -9,12 +9,14 @@ export const App = () => {
   return (
     <div className="App">
       <header className="App__header">
-        <img
-          className="App__logo"
-          src={logo}
-          alt="Rick and Morty"
-          role="banner"
-        />
+        <a href="/" aria-label="home page">
+          <img
+            className="App__logo"
+            src={logo}
+            alt="Rick and Morty"
+            role="banner"
+          />
+        </a>
       </header>
       <main className="App__main">
         <CharactersList />
