@@ -39,14 +39,14 @@ export const Card = ({
     []
   );
 
+  const { loading, error, list } = episodes;
   const episodesFragment = useMemo(() => {
-    const { loading, error, list } = episodes;
     if (loading) {
       return <InlineLoader className="Card__loader" />;
     }
 
     return !error && <ShowMore>{list.join(', ')}</ShowMore>;
-  }, [episodes]);
+  }, [loading, error, list]);
 
   return (
     <div className={clsx('Card', className)}>
@@ -76,7 +76,9 @@ export const Card = ({
         </div>
       </div>
       <p className="Card__episodes">
-        <b>Played in {pluralizeEnglishString(episodes.total, 'episode')}: </b>
+        <b className="Card__label">
+          Played in {pluralizeEnglishString(episodes.total, 'episode')}:{' '}
+        </b>
         {episodesFragment}
       </p>
     </div>

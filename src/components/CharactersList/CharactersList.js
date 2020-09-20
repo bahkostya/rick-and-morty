@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { getLocation, getEpisode } from 'rickmortyapi';
 import { useQueryParam, NumberParam } from 'use-query-params';
 
@@ -11,9 +11,11 @@ import loader from '../../assets/loader.png';
 
 import './CharactersList.css';
 
+const DEFAULT_PAGE = 1;
+
 export const CharactersList = () => {
-  const [initialPage] = useQueryParam('page', NumberParam);
-  const [page, setPage] = useState(initialPage || 1);
+  const [pageParam, setPage] = useQueryParam('page', NumberParam);
+  const page = isNaN(parseInt(pageParam, 10)) ? DEFAULT_PAGE : pageParam;
 
   const [
     charactersLoading,
@@ -37,7 +39,7 @@ export const CharactersList = () => {
 
   const getFullLocation = useCallback(
     (location, allLocations) => {
-      const { dimension, residents = [], type } =
+      const { dimension, residents, type } =
         allLocations.find(
           (locationData) => getIdFromUrl(location.url) === locationData.id
         ) || {};
@@ -47,7 +49,7 @@ export const CharactersList = () => {
         error: locationsError,
         name: location.name,
         dimension,
-        residentsCount: residents.length,
+        residentsCount: residents?.length,
         type,
       };
     },

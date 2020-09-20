@@ -10,6 +10,7 @@
     "query-string": "^6.13.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "rickmortyapi": "^0.3.0",
     "use-query-params": "^1.1.8"

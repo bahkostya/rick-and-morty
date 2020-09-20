@@ -1,17 +1,14 @@
 import { useEffect } from 'react';
 import { getCharacter } from 'rickmortyapi';
-import { useQueryParam, NumberParam } from 'use-query-params';
 
 import useFetch from './useFetch';
 
-export default function useCharactersFetch({ page }) {
+export default function useCharactersFetch({ page = 1 }) {
   const [loading, error, data, fetch] = useFetch(getCharacter);
-  const [, setPage] = useQueryParam('page', NumberParam);
 
   useEffect(() => {
     fetch({ page });
-    setPage(page);
-  }, [fetch, page, setPage]);
+  }, [fetch, page]);
 
   const characters = data?.results || [];
   const totalPages = data?.info?.pages;
